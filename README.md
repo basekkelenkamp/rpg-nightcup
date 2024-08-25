@@ -1,5 +1,5 @@
 
-# spotify QR scanner
+# RPG Nightcup
 
 ## Introduction
 
@@ -28,6 +28,10 @@ First, install the dependencies:
 
 ```bash
 npm install
+```
+
+```bash
+poetry install
 ```
 
 Then, run the development server:
