@@ -7,8 +7,8 @@ app = FastAPI()
 async def get_nightcup_sheet_data():
     print("Fetching data from the Google Sheet...")
     try:
-        sheets_data = get_google_sheets_data()
-        return {"data": sheets_data}
+        data = get_google_sheets_data()
+        return data
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

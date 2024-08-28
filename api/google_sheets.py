@@ -19,17 +19,26 @@ service = build('sheets', 'v4', credentials=credentials)
 
 def get_google_sheets_data():
     try:
-        result = service.spreadsheets().values().get(spreadsheetId=SPREADSHEET_ID, range=SHEET_NAME).execute()
+        # Get cup data (all columns up to row 57)
+        result = service.spreadsheets().values().get(
+            spreadsheetId=SPREADSHEET_ID, 
+            range=SHEET_NAME
+        ).execute()
         values = result.get('values', [])
+        raw_cup_data = transpose_data(values[:57])
+        raw_stats_data = transpose_data(values[57:])
 
-        if not values:
-            return {"message": "No data found in the sheet."}
+        if not raw_cup_data:
+            raise ValueError("No raw_cup_data found in the sheet.")
+        
+        if not raw_stats_data:
+            return ValueError("No raw_stats_data found in the sheet.")
 
-        # Transpose rows to columns
-        transposed_data = transpose_data(values)
-
-        return transposed_data
-
+        print("Data fetched successfully.")
+        return {
+            'cups_raw': parse_raw_cups(raw_cup_data),
+            'stats_raw': parse_raw_stats(raw_stats_data)
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -49,3 +58,14 @@ def transpose_data(data):
                 transposed_data[i].append('')  # Fill with empty string if the row is shorter
 
     return transposed_data
+
+
+
+def parse_raw_cups(raw_cups):
+    print("Parsing raw cups...")
+    return raw_cups
+
+
+def parse_raw_stats(raw_stats):
+    print("Parsing raw stats...")
+    return raw_stats
