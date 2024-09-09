@@ -17,11 +17,12 @@ SPREADSHEET_ID = '1gwA4t40UkzgbTplMDfFlU_wRs77BctlHAld9YksNNt0'
 SHEET_NAME = 'TMNF&TM² RPG Titlepack || RPG Nightcups 2010-'
 service = build('sheets', 'v4', credentials=credentials)
 
+
 def get_google_sheets_data():
     try:
         # Get cup data (all columns up to row 57)
         result = service.spreadsheets().values().get(
-            spreadsheetId=SPREADSHEET_ID, 
+            spreadsheetId=SPREADSHEET_ID,
             range=SHEET_NAME
         ).execute()
         values = result.get('values', [])
@@ -30,7 +31,7 @@ def get_google_sheets_data():
 
         if not raw_cup_data:
             raise ValueError("No raw_cup_data found in the sheet.")
-        
+
         if not raw_stats_data:
             return ValueError("No raw_stats_data found in the sheet.")
 
@@ -59,6 +60,10 @@ def transpose_data(data):
 
     return transposed_data
 
+
+def get_hyperlink_from_cell(cell):
+    # https://stackoverflow.com/questions/63838821/how-to-get-hyperlinks-using-google-sheets-api-v4
+    pass
 
 
 def parse_raw_cups(raw_cups):

@@ -3,6 +3,7 @@ from api.google_sheets import get_google_sheets_data
 
 app = FastAPI()
 
+
 @app.get("/api/nightcup-sheet-data")
 async def get_nightcup_sheet_data():
     print("Fetching data from the Google Sheet...")
