@@ -20,12 +20,26 @@ service = build('sheets', 'v4', credentials=credentials)
 
 def get_google_sheets_data():
     try:
-        # Get cup data (all columns up to row 57)
-        result = service.spreadsheets().values().get(
+        # Fetch the spreadsheet data including cell data and formatting
+        result = service.spreadsheets().get(
             spreadsheetId=SPREADSHEET_ID,
-            range=SHEET_NAME
+            ranges=[SHEET_NAME],
+            includeGridData=True
         ).execute()
-        values = result.get('values', [])
+        sheet = result['sheets'][0]
+        data = sheet['data'][0]
+        rows = data.get('rowData', [])
+
+        # Process the rows to extract the values with hyperlinks combined
+        values = []
+        for row in rows:
+            row_values = []
+            for cell in row.get('values', []):
+                cell_value = get_cell_value_with_hyperlink(cell)
+                row_values.append(cell_value)
+            values.append(row_values)
+
+        # Transpose and process as before
         raw_cup_data = transpose_data(values[:57])
         raw_stats_data = transpose_data(values[57:])
 
@@ -33,15 +47,16 @@ def get_google_sheets_data():
             raise ValueError("No raw_cup_data found in the sheet.")
 
         if not raw_stats_data:
-            return ValueError("No raw_stats_data found in the sheet.")
+            raise ValueError("No raw_stats_data found in the sheet.")
 
         print("Data fetched successfully.")
         return {
-            'cups_raw': parse_raw_cups(raw_cup_data),
-            'stats_raw': parse_raw_stats(raw_stats_data)
+            'cups_raw': raw_cup_data,
+            'stats_raw': raw_stats_data,
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 def transpose_data(data):
     # Determine the maximum number of columns in any row
@@ -61,16 +76,19 @@ def transpose_data(data):
     return transposed_data
 
 
-def get_hyperlink_from_cell(cell):
-    # https://stackoverflow.com/questions/63838821/how-to-get-hyperlinks-using-google-sheets-api-v4
-    pass
-
-
-def parse_raw_cups(raw_cups):
-    print("Parsing raw cups...")
-    return raw_cups
-
-
-def parse_raw_stats(raw_stats):
-    print("Parsing raw stats...")
-    return raw_stats
+def get_cell_value_with_hyperlink(cell):
+    cell_value = ''
+    cell_hyperlink = None
+    if 'formattedValue' in cell:
+        cell_value = cell['formattedValue']
+    if 'hyperlink' in cell:
+        cell_hyperlink = cell['hyperlink']
+    elif 'textFormatRuns' in cell:
+        for run in cell['textFormatRuns']:
+            if 'format' in run and 'link' in run['format']:
+                cell_hyperlink = run['format']['link'].get('uri')
+                break  # Take the first hyperlink found
+    if cell_hyperlink:
+        return f'{cell_hyperlink}$$${cell_value}'
+    else:
+        return cell_value

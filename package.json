@@ -5,8 +5,7 @@
   "scripts": {
     "fastapi-dev": "poetry run uvicorn api.index:app --log-level debug",
     "next-dev": "next dev",
-    "dev": "concurrently \"npm run next-dev\" \"npm run open-fastapi-terminal\"",
-    "open-fastapi-terminal": "start powershell  -Command \"npm run fastapi-dev\"",
+    "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
