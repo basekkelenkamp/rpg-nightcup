@@ -1,0 +1,55 @@
+/* /styles/globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  @apply bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+
+/* Custom Fonts */
+.font-montserrat {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+/* Gradient Border for Cards */
+.gradient-border {
+  position: relative;
+  border-radius: 1rem; /* Match with rounded-xl */
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #6d5dfc, #c299fc, #6d5dfc);
+  z-index: -1;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: inherit;
+  z-index: -1;
+  border-radius: inherit;
+}

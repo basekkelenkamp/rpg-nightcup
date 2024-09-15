@@ -1,11 +1,21 @@
-// app/layout.tsx
+// /app/layout.tsx
+
 import { ReactNode } from 'react';
 import { DataProvider } from '../context/DataContext';
 import { fetchData } from '../context/fetchData';
+import Header from '../components/Header';
+import '../styles/globals.css';
+import { Montserrat } from 'next/font/google';
+import Footer from '@/components/Footer';
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+});
 
 export const metadata = {
-  title: 'My Next.js App',
-  description: 'An app with global data fetching and caching.',
+  title: 'Trackmania RPG Competitions',
+  description: 'Competition website for the RPG Trackmania2 community.',
 };
 
 interface RootLayoutProps {
@@ -13,15 +23,16 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
-  // Fetch data at build time or server-side with revalidation
   const initialData = await fetchData();
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" data-theme="mycustomtheme" className={montserrat.variable}>
+      <body className="bg-fixed bg-gradient-to-br from-[#043442] via-[#0b3d4e] to-[#043442] text-base font-montserrat">
         <DataProvider initialData={initialData}>
-          {children}
+          <Header />
+          <main className="container mx-auto p-4">{children}</main>
         </DataProvider>
+        <Footer/>
       </body>
     </html>
   );
