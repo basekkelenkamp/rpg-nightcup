@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: 'Trackmania RPG Competitions',
+  title: 'RPG Nightcup',
   description: 'Competition website for the RPG Trackmania2 community.',
 };
 

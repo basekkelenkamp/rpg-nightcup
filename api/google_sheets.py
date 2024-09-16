@@ -18,44 +18,32 @@ SHEET_NAME = 'TMNF&TM² RPG Titlepack || RPG Nightcups 2010-'
 service = build('sheets', 'v4', credentials=credentials)
 
 
-def get_google_sheets_data():
-    try:
-        # Fetch the spreadsheet data including cell data and formatting
-        result = service.spreadsheets().get(
-            spreadsheetId=SPREADSHEET_ID,
-            ranges=[SHEET_NAME],
-            includeGridData=True
-        ).execute()
-        sheet = result['sheets'][0]
-        data = sheet['data'][0]
-        rows = data.get('rowData', [])
+def get_google_sheets_cup_data():
+    # Fetch the spreadsheet data including cell data and formatting
+    result = service.spreadsheets().get(
+        spreadsheetId=SPREADSHEET_ID,
+        ranges=[f"{SHEET_NAME}!A1:ZZ56"],
+        includeGridData=True
+    ).execute()
+    sheet = result['sheets'][0]
+    data = sheet['data'][0]
+    rows = data.get('rowData', [])
 
-        # Process the rows to extract the values with hyperlinks combined
-        values = []
-        for row in rows:
-            row_values = []
-            for cell in row.get('values', []):
-                cell_value = get_cell_value_with_hyperlink(cell)
-                row_values.append(cell_value)
-            values.append(row_values)
+    # Process the rows to extract the values with hyperlinks combined
+    values = []
+    for row in rows:
+        row_values = []
+        for cell in row.get('values', []):
+            cell_value = get_cell_value_with_hyperlink(cell)
+            row_values.append(cell_value)
+        values.append(row_values)
 
-        # Transpose and process as before
-        raw_cup_data = transpose_data(values[:57])
-        raw_stats_data = transpose_data(values[57:])
 
-        if not raw_cup_data:
-            raise ValueError("No raw_cup_data found in the sheet.")
+    if not values:
+        raise ValueError("No raw_cup_data found in the sheet.")
 
-        if not raw_stats_data:
-            raise ValueError("No raw_stats_data found in the sheet.")
-
-        print("Data fetched successfully.")
-        return {
-            'cups_raw': raw_cup_data,
-            'stats_raw': raw_stats_data,
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    print("Data fetched successfully.")
+    return transpose_data(values[:57])
 
 
 def transpose_data(data):
