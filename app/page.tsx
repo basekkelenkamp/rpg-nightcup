@@ -5,9 +5,10 @@ import CupCard from '@/components/CupCard';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
 import { useData } from '@/context/DataContext';
 import { Cup } from '@/types';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function Home() {
-  const { data } = useData() as { data: Cup[] };
+  const { data } = useData() as { data: Cup[] | null };
 
   // Announcement Data
   const announcementTitle = 'Special Double 30th Edition!';
@@ -25,6 +26,10 @@ export default function Home() {
     'Format': 'Time Attack & Knockout Rounds',
     'Map release': 'Saturday, October 12, 2024',
   };
+
+  if (!data) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center px-4">

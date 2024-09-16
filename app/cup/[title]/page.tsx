@@ -6,10 +6,16 @@ import { useData } from '@/context/DataContext';
 import { Cup } from '@/types';
 import { FaMapMarkedAlt, FaUserTie, FaCalendarAlt, FaImage } from 'react-icons/fa';
 import TopThree from '@/components/TopThree';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function CupPage() {
   const { title } = useParams();
-  const { data } = useData() as { data: Cup[] };
+  const { data } = useData() as { data: Cup[] | null };
+
+
+  if (!data) {
+    return <LoadingSpinner />;
+  }
 
   // Find the specific cup by its title
   const cup = data.find(cup => cup.title.replace(/#/g, '-').replace(/\s+/g, '').toLowerCase() === title);

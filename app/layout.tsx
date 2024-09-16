@@ -2,7 +2,6 @@
 
 import { ReactNode } from 'react';
 import { DataProvider } from '../context/DataContext';
-import { fetchData } from '../context/fetchData';
 import Header from '../components/Header';
 import '../styles/globals.css';
 import { Montserrat } from 'next/font/google';
@@ -22,17 +21,16 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
-  const initialData = await fetchData();
-
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" data-theme="mycustomtheme" className={montserrat.variable}>
       <body className="bg-fixed bg-gradient-to-br from-[#043442] via-[#0b3d4e] to-[#043442] text-base font-montserrat">
-        <DataProvider initialData={initialData}>
+        {/* Wrap in DataProvider but don't pass initial data yet */}
+        <DataProvider initialData={null}>
           <Header />
           <main className="container mx-auto p-4">{children}</main>
         </DataProvider>
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

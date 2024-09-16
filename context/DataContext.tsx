@@ -1,27 +1,30 @@
+// /context/DataContext.tsx
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { fetchData } from './fetchData'; // Import fetch function
 
 interface DataContextType {
   data: any | null;
-  setData: React.Dispatch<React.SetStateAction<any>>; // Adjust type based on your data structure
+  setData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 interface DataProviderProps {
   children: ReactNode;
-  initialData: any; // Adjust type based on your data structure
+  initialData: any; // You can set a more specific type if needed
 }
 
 export function DataProvider({ children, initialData }: DataProviderProps) {
   const [data, setData] = useState(initialData);
 
   useEffect(() => {
-    if (!data && initialData) {
-      setData(initialData);
+    // Fetch data client-side
+    if (!data) {
+      fetchData().then(setData).catch(console.error);
     }
-  }, [data, initialData]);
+  }, [data]);
 
   return (
     <DataContext.Provider value={{ data, setData }}>

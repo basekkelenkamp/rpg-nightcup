@@ -8,7 +8,7 @@ export async function fetchData(): Promise<Cup[]> {
 
   // Check if baseUrl is defined or fallback to a default
   const res = await fetch(`${baseUrl}/api/nightcup-sheet-data`, {
-    next: { revalidate: baseUrl.includes('localhost') ? 2 : 60 },
+    next: { revalidate: baseUrl.includes('localhost') ? 2 : 7200 },
   });
 
   if (!res.ok) {
