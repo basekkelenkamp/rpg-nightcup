@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import { createPortal } from 'react-dom';
 import TopThree from './TopThree';
 import { Cup } from '@/types';
 import {
@@ -98,25 +99,35 @@ const CupCard = ({ cup }: { cup: Cup }) => {
 
             {/* Watch VOD Button */}
             {vods.length > 1 ? (
-              // Dropdown button for multiple VODs using DaisyUI
-              <div className="dropdown relative z-40" ref={dropdownRef}>
-                <button
-                  className={`btn btn-accent dropdown-toggle`}
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            <div className="relative z-30" ref={dropdownRef}>
+              <button
+                className={`btn btn-accent dropdown-toggle`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                Watch VOD
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-4 w-4 ml-2 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Watch VOD
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`h-4 w-4 ml-2 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : 'rotate-0'}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Render the dropdown using a portal */}
+              {isDropdownOpen &&
+                dropdownRef.current &&
+                createPortal(
+                  <ul
+                    className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-52 mt-2 absolute z-50"
+                    style={{
+                      position: 'absolute',
+                      top: `${dropdownRef.current.getBoundingClientRect().bottom + window.scrollY}px`,
+                      left: `${dropdownRef.current.getBoundingClientRect().left + window.scrollX}px`,
+                    }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                {isDropdownOpen && (
-                  <ul className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-52 mt-2 absolute z-50">
                     {vods.map((vod, index) => (
                       <li key={index}>
                         <a
@@ -129,22 +140,22 @@ const CupCard = ({ cup }: { cup: Cup }) => {
                         </a>
                       </li>
                     ))}
-                  </ul>
+                  </ul>,
+                  document.body // Render directly to the body
                 )}
-              </div>
-            ) : (
-              // Single VOD button
-              vods.length === 1 && (
-                <a
-                  href={vods[0].url || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-accent"
-                >
-                  Watch VOD
-                </a>
-              )
-            )}
+            </div>
+          ) : (
+            vods.length === 1 && (
+              <a
+                href={vods[0].url || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-accent"
+              >
+                Watch VOD
+              </a>
+            )
+          )}
           </div>
         </div>
 

@@ -14,7 +14,14 @@ interface AnnouncementBannerProps {
   buttons?: AnnouncementButton[];
 }
 
-const AnnouncementBanner = ({ title, text, details, buttons }: AnnouncementBannerProps) => {
+const AnnouncementBanner = ({ title, text, details }: AnnouncementBannerProps) => {
+  const formattedText = text.split('\n').map((line, index) => (
+    <span key={index}>
+      {line}
+      <br />
+    </span>
+  ));
+
   return (
     <div className="w-full max-w-6xl bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white rounded-2xl shadow-2xl p-8 mx-auto mb-16">
       <div className="flex flex-col md:flex-row items-center">
@@ -25,7 +32,7 @@ const AnnouncementBanner = ({ title, text, details, buttons }: AnnouncementBanne
             {title}
           </h2>
           <p className="text-lg leading-relaxed">
-            {text}
+            {formattedText}
           </p>
         </div>
 
