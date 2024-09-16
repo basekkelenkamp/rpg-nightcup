@@ -1,14 +1,10 @@
 import { Cup } from '@/types';
 
 export async function fetchData(): Promise<Cup[]> {
-  const baseUrl =
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const revalidateTime = process.env.NODE_ENV === 'development' ? 2 : 7200;
 
-  // Check if baseUrl is defined or fallback to a default
-  const res = await fetch(`${baseUrl}/api/nightcup-sheet-data`, {
-    next: { revalidate: baseUrl.includes('localhost') ? 2 : 7200 },
+  const res = await fetch(`/api/nightcup-sheet-data`, {
+    next: { revalidate: revalidateTime },
   });
 
   if (!res.ok) {
