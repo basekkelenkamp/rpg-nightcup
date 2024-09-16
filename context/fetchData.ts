@@ -1,3 +1,5 @@
+import { Cup } from '@/types';
+
 export async function fetchData(): Promise<Cup[]> {
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
