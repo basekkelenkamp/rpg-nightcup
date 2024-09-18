@@ -32,10 +32,10 @@ export default function SubmitMaps() {
       {/* Introduction Section (Full Width) */}
       <div className="w-full">
         <p className="text-lg mb-6">
-          We're always excited to see new RPG maps! Whether you have a brand-new creation or a work-in-progress that you believe would be a perfect fit for the RPG Nightcup, we’d love to check it out.
+          We&#39;re always excited to see new RPG maps! Whether you have a brand-new creation or a work-in-progress that you believe would be a perfect fit for the RPG Nightcup, we’d love to check it out.
         </p>
         <p className="text-lg">
-          To submit your map, send a message on Discord to <b>basbaas333ak</b>. Let’s bring your map into the RPG Nightcup!
+          To submit your map, send a message on Discord to <b>basbaas333ak</b>. Let&#39;s work together to bring your map into the RPG Nightcup!
         </p>
       </div>
 
@@ -79,15 +79,15 @@ export default function SubmitMaps() {
             <li>Maps should be between 3-7 minutes long.</li>
             <li>Nightcup maps tend to be slightly more challenging than traditional RPG maps.</li>
             <li>Maps must maintain a balance between creativity and playability.</li>
-            <li>Ensure your map doesn’t rely on luck-based mechanics.</li>
-            <li>We encourage both new and experienced mappers to submit their work!</li>
+            <li>Ensure your map doesn&#39;t rely on luck-based mechanics.</li>
+            <li>We encourage new and experienced mappers alike to submit their work!</li>
           </ul>
         </div>
       </div>
 
       {/* Call to Action */}
       <div className="mt-12 text-center">
-        <p className="text-xl mb-4">Do you have a map that meets these requirements, or any questions?</p>
+        <p className="text-xl mb-4">Do you have a map that meets these requirements?</p>
         <p className="text-xl mb-4 font-bold">Send your map submission to <span className="text-primary">basbaas333ak</span> on Discord!</p>
       </div>
     </div>
