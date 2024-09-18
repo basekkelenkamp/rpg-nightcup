@@ -4,7 +4,13 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 export default function SubmitMaps() {
-  const images = ['/pics/screen1.jpeg', '/pics/screen2.jpeg', '/pics/screen3.jpeg', '/pics/screen4.jpeg'];
+  // Use Imgur URLs directly
+  const images = [
+    'https://i.imgur.com/bHVgLM0.jpeg',
+    'https://i.imgur.com/X4dT5n0.jpeg',
+    'https://i.imgur.com/lbv8K38.jpeg',
+    'https://i.imgur.com/qGMWRU0.jpeg',
+  ];
 
   // State to track the current image
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +38,7 @@ export default function SubmitMaps() {
       {/* Introduction Section (Full Width) */}
       <div className="w-full">
         <p className="text-lg mb-6">
-          We&#39;re always excited to see new RPG maps! Whether you have a brand-new creation or a work-in-progress that you believe would be a perfect fit for the RPG Nightcup, we’d love to check it out.
+          We&#39;re always excited to see new RPG maps! Whether you have a brand-new creation or a work-in-progress that you believe would be a perfect fit for the RPG Nightcup, we&#39;d love to check it out.
         </p>
         <p className="text-lg">
           To submit your map, send a message on Discord to <b>basbaas333ak</b>. Let&#39;s work together to bring your map into the RPG Nightcup!
@@ -61,13 +67,10 @@ export default function SubmitMaps() {
             </button>
 
             {/* Image */}
-            <Image
+            <img
               src={images[currentIndex]}
               alt={`Screenshot ${currentIndex + 1}`}
-              width={3840}
-              height={2160}
               className="w-full h-full object-cover"
-              priority
             />
           </div>
         </div>
