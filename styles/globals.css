@@ -24,7 +24,6 @@ body {
   animation: fade-in 0.5s ease-out forwards;
 }
 
-
 /* Custom Fonts */
 .font-montserrat {
   font-family: var(--font-montserrat), sans-serif;
@@ -52,4 +51,24 @@ body {
   background: inherit;
   z-index: -1;
   border-radius: inherit;
+}
+
+/* Custom Scrollbar Styling */
+
+/* Webkit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #2d2d2d; /* Background to match the page gradient */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a; /* Slightly darker for the thumb */
+  border-radius: 10px;
+  border: 3px solid #2d2d2d; /* Matches the scrollbar track */
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #2d2d2d; /* Thumb color, Track color */
 }

@@ -1,8 +1,7 @@
-// /components/Header.tsx
 'use client';
 
 import Link from 'next/link';
-import { FaHome, FaChartBar, FaInfoCircle, FaDiscord } from 'react-icons/fa';
+import { FaHome, FaChartBar, FaInfoCircle, FaDiscord, FaPaypal } from 'react-icons/fa';
 
 const Header = () => {
   return (
@@ -43,24 +42,37 @@ const Header = () => {
           </li>
           <li>
             <Link
-              href="/about"
+              href="/submit-maps"
               className="btn btn-ghost btn-sm rounded-btn text-lg font-medium text-base-content hover:bg-secondary hover:text-warning transition duration-200 ease-in-out transform hover:-translate-y-0.5"
             >
               <FaInfoCircle className="h-5 w-5 mr-1" />
-              About
+              Submit Maps
             </Link>
           </li>
         </ul>
       </div>
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-end hidden lg:flex space-x-4">
+        {/* Donate Button */}
         <Link
-          href="https://discord.gg/BFdPG2ZCXb"
-          className="btn btn-accent text-lg font-medium text-base-content"
+          href="https://www.paypal.com/paypalme/333akbeats"
+          className="btn bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 opacity-60 text-lg font-medium text-base-content flex items-center space-x-2 hover:opacity-80 transition duration-300 ease-in-out"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FaDiscord className="h-5 w-5 mr-1" />
-          Join the Discord
+          <FaPaypal className="h-5 w-5" />
+          <span>Donate</span>
+        </Link>
+
+
+        {/* Join the Discord Button */}
+        <Link
+          href="https://discord.gg/BFdPG2ZCXb"
+          className="btn btn-accent text-lg font-medium text-base-content flex items-center space-x-2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaDiscord className="h-5 w-5" />
+          <span>Join the Discord</span>
         </Link>
       </div>
       {/* Mobile Menu */}
@@ -102,11 +114,11 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/about"
+                href="/submit-maps"
                 className="btn btn-ghost btn-sm rounded-btn text-lg font-medium text-base-content hover:bg-secondary hover:text-accent"
               >
                 <FaInfoCircle className="h-5 w-5 mr-1" />
-                About
+                Submit Maps
               </Link>
             </li>
             <li>

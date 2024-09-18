@@ -13,8 +13,10 @@ const Footer = () => {
             </nav>
             <nav>
                 <h6 className="footer-title">RPG Nightcup</h6>
-                <a className="link link-hover" href='/about' target="_blank">About us</a>
+                <a className="link link-hover" href='/stats' target="_blank">Stats</a>
+                <a className="link link-hover" href='/submit-maps' target="_blank">Submit Maps</a>
                 <a className="link link-hover" href='https://discord.gg/BFdPG2ZCXb' target="_blank">Join Discord</a>
+                <a className="link link-hover" href='https://www.paypal.com/paypalme/333akbeats' target="_blank">Donate</a>
             </nav>
         </footer>
     );
