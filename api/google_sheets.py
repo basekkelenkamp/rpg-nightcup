@@ -38,12 +38,22 @@ def get_google_sheets_cup_data():
             row_values.append(cell_value)
         values.append(row_values)
 
-
     if not values:
         raise ValueError("No raw_cup_data found in the sheet.")
 
     print("Data fetched successfully.")
     return transpose_data(values[:57])
+
+
+def get_google_sheets_stats_data():
+    result = service.spreadsheets().values().get(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME}!A58:F1000"
+    ).execute()
+    values = result.get('values', [])
+    raw_stats_data = transpose_data(values)
+
+    return transpose_data(values)
 
 
 def transpose_data(data):

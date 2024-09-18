@@ -20,3 +20,10 @@ stages: CupStage[];
 pre_tm2: boolean;
 top_3: string[];
 }
+
+export interface Stats {
+  most_victories: [string, number][];
+  most_podiums: [string, number][];
+  most_qualifications: [string, number][];
+  most_appearances: [string, number][];
+}
