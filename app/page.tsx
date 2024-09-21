@@ -15,7 +15,7 @@ export default function Home() {
   const announcementText = `
     After the success of the previous cup, we are BACK with a special edition for the 30th RPG Nightcup. (Also, welcome to the brand new RPG Nightcup website!)\n
     This edition will feature a double Nightcup with two dates, with just one week between them. The full map will be released from the start.
-    There will be a big easter egg discovery event, so make sure to join the server and participate for a free qualification spot!\n
+    There will be a discovery event, so make sure to join the server and participate for a free qualification spot!\n
     Let me know if you wish to contribute to the prizepool. Thank you all for the support throughout the years. <3\n
     basbaas
   `;
