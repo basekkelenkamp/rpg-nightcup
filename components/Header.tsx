@@ -53,6 +53,8 @@ const Header = () => {
             <Link
               href="https://tmrpg.com/"
               className="btn btn-ghost btn-sm rounded-btn text-lg font-medium text-base-content hover:bg-secondary hover:text-warning transition duration-200 ease-in-out transform hover:-translate-y-0.5"
+              target="_blank"
+              rel="noopener noreferrer"    
             >
               <FaFlagCheckered className="h-5 w-5 mr-1" />
               tmrpg
