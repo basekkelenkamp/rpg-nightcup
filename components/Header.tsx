@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FaHome, FaChartBar, FaInfoCircle, FaDiscord, FaPaypal } from 'react-icons/fa';
+import { FaHome, FaChartBar, FaInfoCircle, FaDiscord, FaPaypal, FaFlagCheckered  } from 'react-icons/fa';
 
 const Header = () => {
   return (
@@ -47,6 +47,15 @@ const Header = () => {
             >
               <FaInfoCircle className="h-5 w-5 mr-1" />
               Submit Maps
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="https://tmrpg.com/"
+              className="btn btn-ghost btn-sm rounded-btn text-lg font-medium text-base-content hover:bg-secondary hover:text-warning transition duration-200 ease-in-out transform hover:-translate-y-0.5"
+            >
+              <FaFlagCheckered className="h-5 w-5 mr-1" />
+              tmrpg
             </Link>
           </li>
         </ul>

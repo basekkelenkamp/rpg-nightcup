@@ -7,6 +7,7 @@ import { Cup } from '@/types';
 import { FaMapMarkedAlt, FaUserTie, FaCalendarAlt, FaImage } from 'react-icons/fa';
 import TopThree from '@/components/TopThree';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { IoLogoGameControllerB } from "react-icons/io";
 
 export default function CupPage() {
   const { title } = useParams();
@@ -124,6 +125,22 @@ export default function CupPage() {
       {/* Top 3 Players */}
       <div className="my-8">
         <TopThree players={cup.top_3} />
+      </div>
+
+      {/* View World Records Section */}
+      <div className="my-8 flex justify-center items-center bg-base-300 p-4 rounded-lg w-fit mx-auto">
+        <p className="text-lg font-semibold mr-4 flex items-center">
+          View records on {cup.map.name}
+        </p>
+        <a
+          href={`https://tmrpg.com/maps?map=${mapId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary"
+        >
+          <IoLogoGameControllerB className="h-6 w-6 mr-2" />
+          View Records
+        </a>
       </div>
 
       {/* Stages Section */}

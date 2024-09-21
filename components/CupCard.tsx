@@ -67,7 +67,7 @@ const CupCard = ({ cup }: { cup: Cup }) => {
   }, []);
 
   return (
-    <div className="card bg-base-200 p-6 transform transition duration-500 hover:scale-[1.02] rounded-2xl shadow-3xl border border-gray-700 relative z-30">
+    <div className="card bg-base-200 p-6 transform transition duration-500 hover:scale-[1.002] hover:bg-base-300 rounded-2xl shadow-3xl border border-gray-700 relative z-30">
       <div className="flex flex-col md:flex-row relative z-20">
         {/* Map Image and Actions */}
         <div className="w-full md:w-1/3 md:mr-6 flex flex-col items-center">
