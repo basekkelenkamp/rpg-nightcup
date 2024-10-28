@@ -38,11 +38,11 @@ export default function Home() {
       </h1>
 
       {/* Announcement Banner */}
-      <AnnouncementBanner
+      {/* <AnnouncementBanner
         title={announcementTitle}
         text={announcementText}
         details={announcementDetails}
-      />
+      /> */}
 
       <div className="w-full max-w-5xl space-y-8">
         {data.map((cup, index) => (
