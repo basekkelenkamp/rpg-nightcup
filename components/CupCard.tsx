@@ -30,7 +30,7 @@ const CupCard = ({ cup }: { cup: Cup }) => {
     mapId = mapIdMatch ? mapIdMatch[1] : null;
 
     if (mapId) {
-      screenshotUrl = `https://tm.mania-exchange.com/maps/screenshot/normal/${mapId}`;
+      screenshotUrl = `https://tm.mania-exchange.com/mapimage/${mapId}/1`;
     }
 
     if (cup.map.url.includes('tmnf')) {
